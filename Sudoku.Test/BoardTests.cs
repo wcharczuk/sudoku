@@ -8,10 +8,10 @@ using NUnit.Framework;
 
 namespace Sudoku.Test
 {
-    [TestFixtureAttribute]
+    [TestFixture()]
     public class BoardTests : BaseTest
     {
-        [TestAttribute]
+        [Test()]
         public void GetBoardSquare()
         {
             Board valid = GetValidBoard();

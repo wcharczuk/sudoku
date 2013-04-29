@@ -12,18 +12,13 @@ namespace Sudoku.Core
         {
             this._positions = positions;
         }
-
-        /*
-         * squares are:
-         * 0, 1, 2
-         * 3, 4, 5
-         * 6, 7, 8
-        */
-
+		
         private short?[,] _positions = new short?[9, 9];
 
-        public Boolean IsComplete { get; set; }
-        public Boolean IsValid { get; set; }
+		public short?[,] Positions { get { return _positions; }}
+
+		public Boolean IsComplete = true;
+		public Boolean IsValid = true;
 
         public short? this[int row, int col]
         {

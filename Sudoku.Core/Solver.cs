@@ -22,16 +22,33 @@ namespace Sudoku.Core
 
         private static Board _solve_impl(Board position)
         {
+			position.Evaluate();
+
+			if(position.IsComplete)
+				return position;
+			else if(!position.IsValid)
+				return null;
+
             var nextPos = _get_next_open_pos(position);
             if (nextPos != null)
             {
+				var newPositions = new List<Board>();
                 for(short val = 0; val < 9; val++)
                 {
-                    position[nextPos.Value] = val;
+					var newPosition = new Board(position.Positions);
+					newPosition[nextPos.Value] = val;
+					newPositions.Add (newPosition);
                 }
+
+				foreach(var board in newPositions)
+				{
+					var result = _solve_impl(board);
+					if(result != null)
+						return result;
+				}
             }
 
-            return position;
+            return null;
         }
          
         private static Position? _get_next_open_pos(Board position)
