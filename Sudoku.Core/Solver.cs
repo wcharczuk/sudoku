@@ -20,8 +20,8 @@ namespace Sudoku.Core
             return _solve_impl(InitialPositions);
         }
 
-        private static Board _solve_impl(Board position)
-        {
+		private static Board _solve_impl(Board position)
+		{
 			position.Evaluate();
 
 			if(position.IsComplete)
@@ -30,16 +30,16 @@ namespace Sudoku.Core
 				return null;
 
 			var nextPos = GetNextOpenPosition(position);
-            if (nextPos != null)
-            {
+		    if (nextPos != null)
+		    {
 				var newPositions = new List<Board>();
 				foreach(var val in position.GetPossibleValuesAtPosition(nextPos.Value))
-                {
+		        {
 					var newPosition = new Board(position.Positions);
 					newPosition[nextPos.Value] = val;
 
 					newPositions.Add (newPosition);
-                }
+		        }
 
 				foreach(var board in newPositions)
 				{
@@ -48,10 +48,10 @@ namespace Sudoku.Core
 					if(result != null)
 						return result;
 				}
-            }
+		    }
 
-            return null;
-        }
+		    return null;
+		}
          
         private static Position? GetNextOpenPosition(Board position)
         {
