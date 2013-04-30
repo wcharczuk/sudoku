@@ -29,20 +29,22 @@ namespace Sudoku.Core
 			else if(!position.IsValid)
 				return null;
 
-            var nextPos = _get_next_open_pos(position);
+			var nextPos = GetNextOpenPosition(position);
             if (nextPos != null)
             {
 				var newPositions = new List<Board>();
-                for(short val = 0; val < 9; val++)
+				foreach(var val in position.GetPossibleValuesAtPosition(nextPos.Value))
                 {
 					var newPosition = new Board(position.Positions);
 					newPosition[nextPos.Value] = val;
+
 					newPositions.Add (newPosition);
                 }
 
 				foreach(var board in newPositions)
 				{
 					var result = _solve_impl(board);
+
 					if(result != null)
 						return result;
 				}
@@ -51,7 +53,7 @@ namespace Sudoku.Core
             return null;
         }
          
-        private static Position? _get_next_open_pos(Board position)
+        private static Position? GetNextOpenPosition(Board position)
         {
             for (int row = 0; row < 9; row++)
             {

@@ -14,6 +14,10 @@ namespace Sudoku.Test
 			var solver = new Solver(board);
 
 			var solution = solver.Solve();
+
+			Assert.NotNull(solution);
+			Assert.IsTrue(solution.IsComplete);
+			Assert.IsTrue(solution.IsValid);
 		}
 	}
 }
